@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Godzilla Safaris - Travel with the Best</title>
     
-    <!-- Google Fonts for Custom Themes -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700;900&family=Russo+One&family=Uncial+Antiqua&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@700;900&family=Russo+One&family=Uncial+Antiqua&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <!-- Google Analytics (REPLACE G-XXXXXXXX WITH YOUR ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXX');
+    </script>
     
     <style>
         /* ============================================================
-           GLOBAL RESET & BASE
+           GLOBAL RESET & BASE - BRIGHT MODE
         ============================================================ */
         * {
             margin: 0;
@@ -20,106 +29,283 @@
         }
 
         body {
-            background: #0a0a0a;
-            color: #fff;
+            background: #f5f0eb;
+            color: #1a1a1a;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
         }
 
         /* ============================================================
-           HERO SECTION
+           ANIMATED PARTICLE BACKGROUND
+        ============================================================ */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============================================================
+           HERO SECTION - WITH VIDEO BACKGROUND (filamu)
         ============================================================ */
         .hero {
-            padding: 50px 20px 40px;
+            position: relative;
+            padding: 80px 20px 60px;
             text-align: center;
-            border-bottom: 2px solid #1a1a1a;
-            background: #0a0a0a;
+            border-bottom: 2px solid #e0d6cc;
+            overflow: hidden;
+            z-index: 1;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f5f0eb;
         }
 
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .hero-video-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #faf6f0 0%, #f5f0eb 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- HERO VIDEO CONTROLS ---- */
+        .hero-video-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .hero-video-controls button {
+            background: rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.15);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-video-controls button:hover {
+            background: rgba(0,0,0,0.2);
+            border-color: #1a8cff;
+            color: #1a8cff;
+        }
+
+        /* ---- HERO TEXT ---- */
         .hero h1 {
-            font-size: 4rem;
-            letter-spacing: 6px;
-            font-family: 'Oswald', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #ffd700;
-            text-shadow: 3px 3px 0 #cc0000;
-            transform: skew(-5deg);
-        }
-
-        .hero h1 span {
-            color: #39ff14;
-            text-shadow: 3px 3px 0 #006600;
+            font-size: 5.5rem;
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .hero .tagline {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            color: #ffd700;
-            margin-top: 5px;
+            color: #555;
+            margin-top: 10px;
         }
 
         .hero .sub-tagline {
             font-size: 1.2rem;
             font-family: 'Russo One', sans-serif;
-            color: #ff6b6b;
+            color: #1a8cff;
             margin-top: 8px;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
         }
 
         .hero .location-badge-hero {
             display: inline-block;
-            margin-top: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            padding: 8px 25px;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid #ddd;
+            padding: 10px 30px;
             border-radius: 50px;
             font-family: 'Russo One', sans-serif;
-            color: #aaa;
-            font-size: 0.95rem;
-            letter-spacing: 2px;
+            color: #666;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hero .location-badge-hero:hover {
+            border-color: #1a8cff;
+            color: #1a8cff;
         }
 
         /* ============================================================
-           FLEET GRID
+           "WHY CHOOSE US" SECTION - WITH IMAGES
+        ============================================================ */
+        .features-section {
+            max-width: 1200px;
+            margin: 40px auto 20px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-section h2 {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 1px solid #e8e0d8;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            border-color: #1a8cff;
+            box-shadow: 0 10px 30px rgba(26, 140, 255, 0.08);
+        }
+
+        .feature-item .feature-icon {
+            font-size: 3rem;
+            color: #1a8cff;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h3 {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feature-item .feature-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #eee;
+        }
+
+        /* ============================================================
+           FLEET GRID - WITH IMAGE THUMBNAILS
         ============================================================ */
         .fleet {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 40px auto 40px;
             padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .fleet-section-title {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 30px 0 10px;
+            position: relative;
+            z-index: 1;
         }
 
         /* ============================================================
-           VAN CARDS
+           VAN CARDS - WITH IMAGES
         ============================================================ */
         .van-card {
-            background: #111;
-            border-radius: 20px;
-            padding: 35px 25px 30px;
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 0 0 30px 0;
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            border: 2px solid #222;
+            border: 2px solid #e8e0d8;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 800px;
+            will-change: transform;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
 
         .van-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
         }
 
-        .van-card .icon {
-            font-size: 4.5rem;
-            display: inline-block;
-            margin-bottom: 5px;
+        .van-card .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid #e8e0d8;
+        }
+
+        .van-card .card-content {
+            padding: 20px 25px 10px;
+            position: relative;
+            z-index: 1;
         }
 
         .van-card h2 {
             font-size: 2.5rem;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             margin: 5px 0;
         }
 
@@ -128,8 +314,8 @@
             justify-content: center;
             gap: 18px;
             font-size: 0.85rem;
-            color: #bbb;
-            margin: 15px 0;
+            color: #666;
+            margin: 10px 0 15px;
             flex-wrap: wrap;
         }
 
@@ -144,119 +330,133 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #000;
-            background: #39ff14;
+            color: #fff;
+            background: #1a8cff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-view::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            transform: scale(0.5);
+        }
+
+        .btn-view:hover::after {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .btn-view:hover {
             transform: scale(1.05);
         }
 
-        /* ---- GODZILLA CARD (Blue) ---- */
+        /* ---- GODZILLA CARD ---- */
         .van-card.godzilla {
             border-color: #1a8cff;
         }
         .van-card.godzilla:hover {
             border-color: #1a8cff;
-            box-shadow: 0 0 30px rgba(26, 140, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(26, 140, 255, 0.12);
         }
         .van-card.godzilla .features i { color: #1a8cff; }
         .van-card.godzilla .btn-view {
             background: #1a8cff;
-            color: #fff;
         }
         .van-card.godzilla .btn-view:hover {
             background: #1a8cff;
-            box-shadow: 0 0 20px rgba(26, 140, 255, 0.3);
+            box-shadow: 0 0 30px rgba(26, 140, 255, 0.2);
         }
-        /* Godzilla Font - Money Heist Style */
         .van-card.godzilla h2 {
             font-family: 'Oswald', sans-serif;
             font-weight: 900;
-            color: #ffd700;
-            text-shadow: 3px 3px 0 #cc0000;
-            letter-spacing: 6px;
+            color: #1a8cff;
+            letter-spacing: 8px;
             transform: skew(-5deg);
         }
 
-        /* ---- RAGNAR CARD (Black & White with Red accents) ---- */
+        /* ---- RAGNAR CARD ---- */
         .van-card.ragnar {
-            border-color: #555;
+            border-color: #ff4444;
         }
         .van-card.ragnar:hover {
             border-color: #ff4444;
-            box-shadow: 0 0 30px rgba(255, 68, 68, 0.15);
+            box-shadow: 0 10px 40px rgba(255, 68, 68, 0.12);
         }
         .van-card.ragnar .features i { color: #ff4444; }
         .van-card.ragnar .btn-view {
             background: #ff4444;
-            color: #fff;
         }
         .van-card.ragnar .btn-view:hover {
             background: #cc0000;
-            box-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+            box-shadow: 0 0 30px rgba(255, 68, 68, 0.2);
         }
-        /* Ragnar Font - Viking Bold */
         .van-card.ragnar h2 {
             font-family: 'Uncial Antiqua', serif;
             font-weight: 700;
             color: #ff4444;
-            text-shadow: 2px 2px 0 #000, 4px 4px 0 #333;
             letter-spacing: 6px;
         }
 
-        /* ---- GOTHIC CARD (Jungle Green) ---- */
+        /* ---- GOTHIC CARD ---- */
         .van-card.gothic {
-            border-color: #2d5a3d;
+            border-color: #50c878;
         }
         .van-card.gothic:hover {
             border-color: #50c878;
-            box-shadow: 0 0 30px rgba(80, 200, 120, 0.15);
+            box-shadow: 0 10px 40px rgba(80, 200, 120, 0.12);
         }
         .van-card.gothic .features i { color: #50c878; }
         .van-card.gothic .btn-view {
             background: #50c878;
-            color: #000;
         }
         .van-card.gothic .btn-view:hover {
             background: #3da861;
-            box-shadow: 0 0 20px rgba(80, 200, 120, 0.3);
+            box-shadow: 0 0 30px rgba(80, 200, 120, 0.2);
         }
-        /* Gothic Font - Glossy Horror */
         .van-card.gothic h2 {
             font-family: 'Cinzel Decorative', serif;
             font-weight: 900;
-            background: linear-gradient(135deg, #50c878, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #50c878;
             letter-spacing: 4px;
         }
 
         /* ============================================================
-           VAN DETAIL PAGE
+           VAN DETAIL PAGE - WITH GALLERY
         ============================================================ */
         #vanDetail {
             display: none;
             max-width: 950px;
             margin: 40px auto;
             padding: 0 20px;
-            animation: fadeSlideUp 0.5s ease;
+            animation: fadeSlideUp 0.6s ease;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(30px); }
+            0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .van-detail-card {
-            background: #111;
-            border-radius: 25px;
+            background: #ffffff;
+            border-radius: 30px;
             padding: 40px 35px;
-            border: 2px solid #333;
+            border: 2px solid #e8e0d8;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
         }
 
         .van-detail-card .van-header {
@@ -264,89 +464,70 @@
             align-items: center;
             gap: 25px;
             flex-wrap: wrap;
-            border-bottom: 2px solid #1a1a1a;
+            border-bottom: 2px solid #f0ece6;
             padding-bottom: 20px;
             margin-bottom: 20px;
-        }
-
-        .van-detail-card .van-header .icon {
-            font-size: 4rem;
+            position: relative;
+            z-index: 1;
         }
 
         .van-detail-card .van-header h2 {
-            font-size: 3.2rem;
-            letter-spacing: 4px;
+            font-size: 3.5rem;
+            letter-spacing: 6px;
         }
 
-        /* Detail page font overrides */
         .van-detail-card.godzilla-detail .van-header h2 {
             font-family: 'Oswald', sans-serif;
             font-weight: 900;
-            color: #ffd700;
-            text-shadow: 3px 3px 0 #cc0000;
+            color: #1a8cff;
             transform: skew(-5deg);
         }
 
         .van-detail-card.ragnar-detail .van-header h2 {
             font-family: 'Uncial Antiqua', serif;
             color: #ff4444;
-            text-shadow: 2px 2px 0 #000, 4px 4px 0 #333;
         }
 
         .van-detail-card.gothic-detail .van-header h2 {
             font-family: 'Cinzel Decorative', serif;
-            background: linear-gradient(135deg, #50c878, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #50c878;
         }
 
-        .van-detail-card .van-header .sub {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .image-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin: 20px 0;
-        }
-
-        .image-gallery .image-box {
-            background: #1a1a1a;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid #222;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .image-gallery .image-box:hover {
-            border-color: #39ff14;
-            transform: scale(1.02);
-        }
-
-        .image-gallery .image-box img {
+        /* ---- GALLERY WITH MULTIPLE IMAGES ---- */
+        .gallery-main {
             width: 100%;
-            height: 260px;
+            height: 350px;
             object-fit: cover;
-            display: block;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            border: 2px solid #e8e0d8;
         }
 
-        .image-gallery .image-box .label {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.85);
-            padding: 5px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #39ff14;
-            border: 1px solid #39ff14;
-            letter-spacing: 1px;
+        .gallery-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 10px 0 20px;
+        }
+
+        .gallery-thumbnails img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #e8e0d8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-thumbnails img:hover {
+            border-color: #1a8cff;
+            transform: scale(1.05);
+        }
+
+        .gallery-thumbnails img.active {
+            border-color: #1a8cff;
+            box-shadow: 0 0 20px rgba(26, 140, 255, 0.15);
         }
 
         .info-grid {
@@ -354,19 +535,22 @@
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin: 20px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .info-grid .info-item {
-            background: #1a1a1a;
+            background: #f5f0eb;
             padding: 18px;
             border-radius: 14px;
             text-align: center;
-            border: 1px solid #222;
+            border: 1px solid #e8e0d8;
             transition: all 0.3s ease;
         }
 
         .info-grid .info-item:hover {
-            border-color: #39ff14;
+            border-color: #1a8cff;
+            transform: translateY(-3px);
         }
 
         .info-grid .info-item i {
@@ -377,13 +561,13 @@
 
         .info-grid .info-item span {
             font-size: 0.95rem;
-            color: #ccc;
+            color: #555;
         }
 
         .location-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            color: #aaa;
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid #ddd;
+            color: #666;
             padding: 8px 25px;
             border-radius: 50px;
             display: inline-block;
@@ -391,6 +575,14 @@
             font-weight: 600;
             font-family: 'Russo One', sans-serif;
             letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .location-badge:hover {
+            border-color: #1a8cff;
+            color: #1a8cff;
         }
 
         .social-links {
@@ -399,27 +591,29 @@
             justify-content: center;
             margin: 25px 0;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
         .social-links a {
-            color: #fff;
-            background: #1a1a1a;
-            width: 55px;
-            height: 55px;
+            color: #1a1a1a;
+            background: #f5f0eb;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            transition: all 0.3s ease;
+            font-size: 2.2rem;
+            transition: all 0.4s ease;
             text-decoration: none;
-            border: 1px solid #333;
+            border: 2px solid #e8e0d8;
         }
 
         .social-links a:hover {
             background: #E4405F;
             color: #fff;
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(10deg);
             border-color: #E4405F;
         }
 
@@ -429,22 +623,24 @@
             gap: 20px;
             flex-wrap: wrap;
             margin: 20px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-row a {
-            background: #1a1a1a;
+            background: #f5f0eb;
             padding: 14px 30px;
             border-radius: 50px;
-            color: #fff;
+            color: #1a1a1a;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid #333;
+            transition: all 0.4s ease;
+            border: 2px solid #e8e0d8;
             letter-spacing: 1px;
         }
 
         .contact-row a i { margin-right: 12px; }
-        .contact-row a:hover { border-color: #39ff14; transform: scale(1.05); }
+        .contact-row a:hover { border-color: #1a8cff; transform: scale(1.05); }
         .contact-row .whatsapp-link {
             background: #25D366;
             border-color: #25D366;
@@ -457,16 +653,18 @@
 
         .booking-section {
             margin-top: 30px;
-            border-top: 2px solid #1a1a1a;
+            border-top: 2px solid #f0ece6;
             padding-top: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .booking-section h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
-            color: #39ff14;
+            color: #1a8cff;
             font-family: 'Russo One', sans-serif;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         .booking-form input,
@@ -476,9 +674,9 @@
             padding: 15px;
             margin: 8px 0;
             border-radius: 14px;
-            border: 1px solid #222;
-            background: #1a1a1a;
-            color: #fff;
+            border: 2px solid #e8e0d8;
+            background: #ffffff;
+            color: #1a1a1a;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
@@ -487,8 +685,8 @@
         .booking-form textarea:focus,
         .booking-form select:focus {
             outline: none;
-            border-color: #39ff14;
-            background: #0f0f0f;
+            border-color: #1a8cff;
+            box-shadow: 0 0 20px rgba(26, 140, 255, 0.05);
         }
 
         .booking-form textarea {
@@ -507,12 +705,32 @@
             font-size: 1.2rem;
             cursor: pointer;
             margin-top: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 14px;
             letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-form .submit-wa::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            transform: scale(0.5);
+        }
+
+        .booking-form .submit-wa:hover::after {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .booking-form .submit-wa:hover {
@@ -520,118 +738,201 @@
             transform: scale(1.02);
         }
 
-        .booking-form .submit-wa i { font-size: 1.6rem; }
+        .booking-form .submit-wa i { font-size: 1.8rem; }
 
         .back-btn {
             background: transparent;
-            border: 1px solid #333;
-            color: #aaa;
+            border: 2px solid #e8e0d8;
+            color: #666;
             padding: 12px 35px;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             margin-top: 30px;
             width: 100%;
             font-size: 1rem;
             font-weight: 600;
             letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
         }
 
         .back-btn:hover {
-            border-color: #39ff14;
-            color: #fff;
+            border-color: #1a8cff;
+            color: #1a8cff;
+            transform: scale(1.02);
         }
 
         .footer {
             text-align: center;
             padding: 30px;
-            color: #444;
-            border-top: 1px solid #1a1a1a;
+            color: #999;
+            border-top: 1px solid #f0ece6;
             margin-top: 40px;
             font-family: 'Russo One', sans-serif;
             letter-spacing: 2px;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* ============================================================
            RESPONSIVE
         ============================================================ */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; letter-spacing: 4px; }
+            .hero { min-height: 50vh; padding: 60px 20px 40px; }
+            .hero h1 { font-size: 3.5rem; letter-spacing: 2px; }
             .hero .tagline { font-size: 1.4rem; }
             .hero .sub-tagline { font-size: 1rem; letter-spacing: 3px; }
             .van-card h2 { font-size: 2rem; }
             .van-detail-card .van-header h2 { font-size: 2.5rem; }
-            .image-gallery { grid-template-columns: 1fr; }
-            .image-gallery .image-box img { height: 200px; }
+            .gallery-main { height: 200px; }
+            .gallery-thumbnails { grid-template-columns: repeat(2, 1fr); }
+            .gallery-thumbnails img { height: 60px; }
             .info-grid { grid-template-columns: 1fr; }
             .van-detail-card .van-header { flex-direction: column; text-align: center; }
             .van-detail-card { padding: 25px 18px; }
             .fleet { grid-template-columns: 1fr; gap: 25px; }
+            .van-card .card-image { height: 180px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .features-section h2 { font-size: 2.2rem; }
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; letter-spacing: 2px; }
+            .hero h1 { font-size: 2.8rem; letter-spacing: 1px; }
             .hero .tagline { font-size: 1.1rem; }
-            .van-card { padding: 25px 15px; }
+            .van-card { padding: 0 0 20px; }
+            .van-card .card-content { padding: 15px 15px 5px; }
             .van-card h2 { font-size: 1.6rem; }
+            .van-card .card-image { height: 150px; }
             .contact-row a { padding: 10px 18px; font-size: 0.9rem; }
             .social-links a { width: 50px; height: 50px; font-size: 1.8rem; }
+            .features-section h2 { font-size: 2rem; }
+            .feature-item .feature-image { height: 120px; }
         }
     </style>
 </head>
 <body>
 
     <!-- ============================================================
-    HERO SECTION - STARS REMOVED
+    PARTICLE BACKGROUND
+    ============================================================ -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ============================================================
+    HERO SECTION - USING "filamu" VIDEO
     ============================================================ -->
     <div class="hero" id="homeHero">
-        <h1>🦎 <span>GODZILLA</span> SAFARIS</h1>
-        <div class="tagline">Travel with the Best</div>
-        <div class="sub-tagline">⬡ SHARK NATION ⬡</div>
-        <div class="location-badge-hero">
-            <i class="fas fa-map-pin"></i> Based in Nairobi, Kenya
+        <!-- REPLACE "filamu" WITH YOUR VIDEO FILE NAME -->
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+            <source src="images/filamu.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-video-fallback"></div>
+        
+        <div class="hero-content">
+            <h1>Godzilla Safaris</h1>
+            <div class="tagline">Travel with the Best</div>
+            <div class="sub-tagline">⬡ SHARK NATION ⬡</div>
+            <div class="location-badge-hero">
+                <i class="fas fa-map-pin"></i> Based in Nairobi, Kenya
+            </div>
+        </div>
+
+        <!-- Video Controls -->
+        <div class="hero-video-controls">
+            <button onclick="toggleHeroVideo()">
+                <i class="fas fa-pause" id="videoToggleIcon"></i> 
+                <span id="videoToggleText">Pause</span>
+            </button>
+            <button onclick="muteHeroVideo()">
+                <i class="fas fa-volume-up" id="muteToggleIcon"></i>
+            </button>
         </div>
     </div>
+
+    <!-- ============================================================
+    "WHY CHOOSE US" SECTION
+    ============================================================ -->
+    <div class="features-section">
+        <h2>Why Ride With Us</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <img class="feature-image" src="images/godzilla-face.jpeg" alt="Premium Vans" onerror="this.style.display='none'" />
+                <div class="feature-icon"><i class="fas fa-crown"></i></div>
+                <h3>Premium Fleet</h3>
+                <p>Our vans are top-of-the-line with premium sound systems, ambient lighting, and comfortable seating.</p>
+            </div>
+
+            <div class="feature-item">
+                <img class="feature-image" src="images/ragnar-face.jpeg" alt="Professional Drivers" onerror="this.style.display='none'" />
+                <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                <h3>Professional Drivers</h3>
+                <p>Experienced, courteous, and professional drivers who know Nairobi like the back of their hand.</p>
+            </div>
+
+            <div class="feature-item">
+                <img class="feature-image" src="images/gothic-face.jpeg" alt="On Time Guarantee" onerror="this.style.display='none'" />
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h3>On-Time Guarantee</h3>
+                <p>We value your time. Every booking comes with our promise to be punctual and reliable.</p>
+            </div>
+
+            <div class="feature-item">
+                <img class="feature-image" src="images/godzilla-back.jpeg" alt="Safe & Insured" onerror="this.style.display='none'" />
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Safe & Insured</h3>
+                <p>Fully insured and regularly maintained vans for your peace of mind on every journey.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLEET TITLE
+    ============================================================ -->
+    <div class="fleet-section-title">Our Fleet</div>
 
     <!-- ============================================================
     FLEET GRID
     ============================================================ -->
     <div class="fleet" id="fleetGrid">
-        <!-- GODZILLA -->
         <div class="van-card godzilla" onclick="showVan('Godzilla')">
-            <div class="icon">🦎</div>
-            <h2>GODZILLA</h2>
-            <div class="features">
-                <span><i class="fas fa-users"></i> 14 Seater</span>
-                <span><i class="fas fa-music"></i> Sound System</span>
-                <span><i class="fas fa-lightbulb"></i> Ambient Light</span>
+            <img class="card-image" src="images/godzilla-face.jpeg" alt="Godzilla Van" onerror="this.style.display='none'" />
+            <div class="card-content">
+                <h2>GODZILLA</h2>
+                <div class="features">
+                    <span><i class="fas fa-users"></i> 14 Seater</span>
+                    <span><i class="fas fa-music"></i> Sound System</span>
+                    <span><i class="fas fa-lightbulb"></i> Ambient Light</span>
+                </div>
+                <button class="btn-view"><i class="fas fa-eye"></i> View & Book</button>
             </div>
-            <button class="btn-view"><i class="fas fa-eye"></i> View & Book</button>
         </div>
 
-        <!-- RAGNAR -->
         <div class="van-card ragnar" onclick="showVan('Ragnar')">
-            <div class="icon">⚔️</div>
-            <h2>RAGNAR</h2>
-            <div class="features">
-                <span><i class="fas fa-users"></i> 10 Seater</span>
-                <span><i class="fas fa-music"></i> Sound System</span>
-                <span><i class="fas fa-lightbulb"></i> Ambient Light</span>
+            <img class="card-image" src="images/ragnar-face.jpeg" alt="Ragnar Van" onerror="this.style.display='none'" />
+            <div class="card-content">
+                <h2>RAGNAR</h2>
+                <div class="features">
+                    <span><i class="fas fa-users"></i> 10 Seater</span>
+                    <span><i class="fas fa-music"></i> Sound System</span>
+                    <span><i class="fas fa-lightbulb"></i> Ambient Light</span>
+                </div>
+                <button class="btn-view"><i class="fas fa-eye"></i> View & Book</button>
             </div>
-            <button class="btn-view"><i class="fas fa-eye"></i> View & Book</button>
         </div>
 
-        <!-- GOTHIC -->
         <div class="van-card gothic" onclick="showVan('Gothic')">
-            <div class="icon">🖤</div>
-            <h2>GOTHIC</h2>
-            <div class="features">
-                <span><i class="fas fa-users"></i> 14 Seater</span>
-                <span><i class="fas fa-music"></i> Sound System</span>
-                <span><i class="fas fa-lightbulb"></i> Ambient Light</span>
+            <img class="card-image" src="images/gothic-face.jpeg" alt="Gothic Van" onerror="this.style.display='none'" />
+            <div class="card-content">
+                <h2>GOTHIC</h2>
+                <div class="features">
+                    <span><i class="fas fa-users"></i> 14 Seater</span>
+                    <span><i class="fas fa-music"></i> Sound System</span>
+                    <span><i class="fas fa-lightbulb"></i> Ambient Light</span>
+                </div>
+                <button class="btn-view"><i class="fas fa-eye"></i> View & Book</button>
             </div>
-            <button class="btn-view"><i class="fas fa-eye"></i> View & Book</button>
         </div>
     </div>
 
@@ -648,7 +949,7 @@
     FOOTER
     ============================================================ -->
     <div class="footer" id="mainFooter">
-        <p>© 2026 Godzilla Safaris — Shark Nation <i class="fas fa-shark" style="color:#39ff14;"></i></p>
+        <p>© 2026 Godzilla Safaris — Shark Nation <i class="fas fa-shark" style="color:#1a8cff;"></i></p>
     </div>
 
     <!-- ============================================================
@@ -656,40 +957,171 @@
     ============================================================ -->
     <script>
         // ============================================================
+        //  HERO VIDEO CONTROLS
+        // ============================================================
+        const heroVideo = document.getElementById('heroVideo');
+
+        function toggleHeroVideo() {
+            const icon = document.getElementById('videoToggleIcon');
+            const text = document.getElementById('videoToggleText');
+            if (heroVideo.paused) {
+                heroVideo.play();
+                icon.className = 'fas fa-pause';
+                text.textContent = 'Pause';
+            } else {
+                heroVideo.pause();
+                icon.className = 'fas fa-play';
+                text.textContent = 'Play';
+            }
+        }
+
+        function muteHeroVideo() {
+            const icon = document.getElementById('muteToggleIcon');
+            if (heroVideo.muted) {
+                heroVideo.muted = false;
+                icon.className = 'fas fa-volume-up';
+            } else {
+                heroVideo.muted = true;
+                icon.className = 'fas fa-volume-mute';
+            }
+        }
+
+        // ============================================================
+        //  PARTICLE BACKGROUND
+        // ============================================================
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.documentElement.scrollHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.3 + 0.1;
+                this.color = this.getRandomColor();
+            }
+
+            getRandomColor() {
+                const colors = [
+                    '26, 140, 255',
+                    '255, 68, 68',
+                    '80, 200, 120',
+                    '200, 180, 160',
+                    '150, 150, 150'
+                ];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    this.x -= dx * force * 0.005;
+                    this.y -= dy * force * 0.005;
+                }
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            const count = Math.min(80, (canvas.width * canvas.height) / 10000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY + window.scrollY;
+        });
+
+        // ============================================================
+        //  3D TILT EFFECT ON VAN CARDS
+        // ============================================================
+        document.querySelectorAll('.van-card').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                this.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+                this.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // ============================================================
         //  VAN DATA
         // ============================================================
         const vanData = {
             'Godzilla': {
-                icon: '🦎',
                 color: '#1a8cff',
                 colorName: 'Blue',
-                phone: '254773209863',
+                phone: '2541107504718',
                 seats: '14 Seater',
                 instagram: 'https://www.instagram.com/godzilaa001/',
-                imageFront: 'images/godzilla-face.jpeg',
-                imageBack: 'images/godzilla-back.jpeg',
+                images: ['images/godzilla-face.jpeg', 'images/godzilla-back.jpeg', 'images/godzilla-face.jpeg', 'images/godzilla-back.jpeg'],
                 detailClass: 'godzilla-detail'
             },
             'Ragnar': {
-                icon: '⚔️',
                 color: '#ff4444',
                 colorName: 'Black & White',
                 phone: '254798394613',
                 seats: '10 Seater',
                 instagram: 'https://www.instagram.com/ragnar.mk001/',
-                imageFront: 'images/ragnar-face.jpeg',
-                imageBack: 'images/ragnar-back.jpeg',
+                images: ['images/ragnar-face.jpeg', 'images/ragnar-back.jpeg', 'images/ragnar-face.jpeg', 'images/ragnar-back.jpeg'],
                 detailClass: 'ragnar-detail'
             },
             'Gothic': {
-                icon: '🖤',
                 color: '#50c878',
                 colorName: 'Emerald Green',
                 phone: '254745717972',
                 seats: '14 Seater',
                 instagram: 'https://www.instagram.com/godz.ill.a_2.0/',
-                imageFront: 'images/gothic-face.jpeg',
-                imageBack: 'images/gothic-back.jpeg',
+                images: ['images/gothic-face.jpeg', 'images/gothic-back.jpeg', 'images/gothic-face.jpeg', 'images/gothic-back.jpeg'],
                 detailClass: 'gothic-detail'
             }
         };
@@ -697,13 +1129,15 @@
         let currentVanName = '';
 
         // ============================================================
-        //  SHOW VAN DETAIL
+        //  SHOW VAN DETAIL - WITH GALLERY
         // ============================================================
         function showVan(name) {
             currentVanName = name;
             document.getElementById('fleetGrid').style.display = 'none';
             document.getElementById('vanDetail').style.display = 'block';
             document.getElementById('homeHero').style.display = 'none';
+            document.querySelector('.features-section').style.display = 'none';
+            document.querySelector('.fleet-section-title').style.display = 'none';
 
             const data = vanData[name];
             if (!data) return;
@@ -712,9 +1146,15 @@
             card.style.borderColor = data.color;
             card.className = 'van-detail-card ' + data.detailClass;
 
+            let galleryThumbnails = '';
+            data.images.forEach((img, index) => {
+                galleryThumbnails += `
+                    <img src="${img}" alt="${name} view ${index+1}" onclick="changeGalleryImage(this, 'galleryMain_${name}')" onerror="this.style.display='none'" />
+                `;
+            });
+
             card.innerHTML = `
                 <div class="van-header">
-                    <div class="icon">${data.icon}</div>
                     <div>
                         <h2>${name.toUpperCase()}</h2>
                     </div>
@@ -724,15 +1164,21 @@
                     <i class="fas fa-map-pin"></i> Based in Nairobi, Kenya
                 </div>
 
-                <div class="image-gallery">
-                    <div class="image-box">
-                        <img src="${data.imageFront}" alt="${name} Front" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:260px;background:#1a1a1a;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;margin-right:10px;\\'></i> Add ${name} Front</div>'">
-                        <div class="label">👀 Front View</div>
-                    </div>
-                    <div class="image-box">
-                        <img src="${data.imageBack}" alt="${name} Back" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:260px;background:#1a1a1a;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:2rem;margin-right:10px;\\'></i> Add ${name} Back</div>'">
-                        <div class="label">🔙 Back View</div>
-                    </div>
+                <!-- Video Preview Option (Optional - can be uncommented) -->
+                <!-- 
+                <div style="position:relative; margin-bottom:15px; border-radius:16px; overflow:hidden; border:2px solid #e8e0d8;">
+                    <video style="width:100%; height:300px; object-fit:cover; background:#f5f0eb;" controls playsinline>
+                        <source src="images/jumah.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                -->
+
+                <!-- Gallery -->
+                <img class="gallery-main" id="galleryMain_${name}" src="${data.images[0]}" alt="${name} Main View" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Add more images for ${name}</div>'" />
+
+                <div class="gallery-thumbnails">
+                    ${galleryThumbnails}
                 </div>
 
                 <div class="info-grid">
@@ -767,7 +1213,7 @@
 
                 <div class="booking-section">
                     <h3><i class="fas fa-calendar-check" style="color:${data.color};"></i> Book This Van</h3>
-                    <p style="color:#aaa; margin-bottom:15px; font-size:0.95rem;">
+                    <p style="color:#666; margin-bottom:15px; font-size:0.95rem;">
                         Fill in your details and we'll confirm via WhatsApp within 10 minutes.
                     </p>
 
@@ -783,7 +1229,7 @@
                             <i class="fab fa-whatsapp"></i> Send Booking via WhatsApp
                         </button>
                     </form>
-                    <p style="font-size:0.8rem; color:#555; margin-top:10px; text-align:center;">
+                    <p style="font-size:0.8rem; color:#999; margin-top:10px; text-align:center;">
                         <i class="fas fa-lock" style="color:${data.color};"></i> Your info is safe. We'll reply via WhatsApp.
                     </p>
                 </div>
@@ -833,12 +1279,28 @@
         }
 
         // ============================================================
+        //  GALLERY IMAGE SWITCH
+        // ============================================================
+        function changeGalleryImage(thumbnail, mainId) {
+            const main = document.getElementById(mainId);
+            if (main) {
+                main.src = thumbnail.src;
+            }
+            document.querySelectorAll('.gallery-thumbnails img').forEach(img => {
+                img.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+        }
+
+        // ============================================================
         //  GO HOME
         // ============================================================
         function goHome() {
             document.getElementById('fleetGrid').style.display = 'grid';
             document.getElementById('vanDetail').style.display = 'none';
             document.getElementById('homeHero').style.display = 'block';
+            document.querySelector('.features-section').style.display = 'block';
+            document.querySelector('.fleet-section-title').style.display = 'block';
             window.scrollTo(0, 0);
         }
     </script>
