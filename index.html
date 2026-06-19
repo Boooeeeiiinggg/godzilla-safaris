@@ -113,7 +113,7 @@
         }
 
         /* ============================================================
-           "WHY CHOOSE US" SECTION - 4 PHOTOS
+           "WHY CHOOSE US" SECTION
         ============================================================ */
         .features-section {
             max-width: 1200px;
@@ -181,6 +181,87 @@
             border-radius: 12px;
             margin-bottom: 12px;
             border: 1px solid #eee;
+        }
+
+        /* ============================================================
+           GALLERY SECTION
+        ============================================================ */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 40px auto 20px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #e8e0d8;
+            transition: all 0.4s ease;
+            aspect-ratio: 1 / 1;
+            background: #f5f0eb;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: #1a8cff;
+            box-shadow: 0 10px 30px rgba(26, 140, 255, 0.15);
+            z-index: 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .van-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+            font-family: 'Russo One', sans-serif;
+        }
+
+        /* Van-specific border colors on hover */
+        .gallery-item.godzilla-item:hover {
+            border-color: #1a8cff;
+            box-shadow: 0 10px 30px rgba(26, 140, 255, 0.2);
+        }
+        .gallery-item.ragnar-item:hover {
+            border-color: #ff4444;
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.2);
+        }
+        .gallery-item.gothic-item:hover {
+            border-color: #50c878;
+            box-shadow: 0 10px 30px rgba(80, 200, 120, 0.2);
         }
 
         /* ============================================================
@@ -740,6 +821,8 @@
             .van-card .card-image { height: 180px; }
             .features-grid { grid-template-columns: 1fr 1fr; }
             .features-section h2 { font-size: 2.2rem; }
+            .gallery-title { font-size: 2.2rem; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
         }
 
         @media (max-width: 480px) {
@@ -754,6 +837,8 @@
             .features-section h2 { font-size: 2rem; }
             .feature-item .feature-image { height: 120px; }
             .features-grid { grid-template-columns: 1fr; }
+            .gallery-title { font-size: 2rem; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
         }
     </style>
 </head>
@@ -779,12 +864,11 @@
     </div>
 
     <!-- ============================================================
-    "WHY CHOOSE US" SECTION - 4 PHOTOS
+    "WHY CHOOSE US" SECTION
     ============================================================ -->
     <div class="features-section" id="featuresSection">
         <h2>Why Ride With Us</h2>
         <div class="features-grid">
-            <!-- Feature 1: Premium Fleet (sherif) -->
             <div class="feature-item">
                 <img class="feature-image" src="images/sherif.jpeg" alt="Premium Fleet" onerror="this.style.display='none'" />
                 <div class="feature-icon"><i class="fas fa-crown"></i></div>
@@ -792,7 +876,6 @@
                 <p>Our vans are top-of-the-line with premium sound systems, ambient lighting, and comfortable seating.</p>
             </div>
 
-            <!-- Feature 2: Professional Drivers (jones) -->
             <div class="feature-item">
                 <img class="feature-image" src="images/jones.jpeg" alt="Professional Drivers" onerror="this.style.display='none'" />
                 <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
@@ -800,7 +883,6 @@
                 <p>Experienced, courteous, and professional drivers who know Nairobi like the back of their hand.</p>
             </div>
 
-            <!-- Feature 3: On-Time Guarantee (jumah) -->
             <div class="feature-item">
                 <img class="feature-image" src="images/jumah.jpeg" alt="On-Time Guarantee" onerror="this.style.display='none'" />
                 <div class="feature-icon"><i class="fas fa-clock"></i></div>
@@ -808,13 +890,22 @@
                 <p>We value your time. Every booking comes with our promise to be punctual and reliable.</p>
             </div>
 
-            <!-- Feature 4: Safe & Insured (thuraku) -->
             <div class="feature-item">
                 <img class="feature-image" src="images/thuraku.jpeg" alt="Safe & Insured" onerror="this.style.display='none'" />
                 <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Safe & Insured</h3>
                 <p>Fully insured and regularly maintained vans for your peace of mind on every journey.</p>
             </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    GALLERY SECTION - AUTO-LOADS YOUR IMAGES (1-6 per van)
+    ============================================================ -->
+    <div class="gallery-section" id="gallerySection">
+        <h2 class="gallery-title">📸 Our Fleet Gallery</h2>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Images will load automatically from JavaScript -->
         </div>
     </div>
 
@@ -829,7 +920,7 @@
     <div class="fleet" id="fleetGrid">
         <!-- GODZILLA -->
         <div class="van-card godzilla" onclick="showVan('Godzilla')">
-            <img class="card-image" src="images/godzilla-face.jpeg" alt="Godzilla Van" onerror="this.style.display='none'" />
+            <img class="card-image" src="images/godzilla1.jpeg" alt="Godzilla Van" onerror="this.style.display='none'" />
             <div class="card-content">
                 <h2>GODZILLA</h2>
                 <div class="features">
@@ -843,7 +934,7 @@
 
         <!-- RAGNAR -->
         <div class="van-card ragnar" onclick="showVan('Ragnar')">
-            <img class="card-image" src="images/ragnar-face.jpeg" alt="Ragnar Van" onerror="this.style.display='none'" />
+            <img class="card-image" src="images/ragnar1.jpeg" alt="Ragnar Van" onerror="this.style.display='none'" />
             <div class="card-content">
                 <h2>RAGNAR</h2>
                 <div class="features">
@@ -857,7 +948,7 @@
 
         <!-- GOTHIC -->
         <div class="van-card gothic" onclick="showVan('Gothic')">
-            <img class="card-image" src="images/gothic-face.jpeg" alt="Gothic Van" onerror="this.style.display='none'" />
+            <img class="card-image" src="images/gothic1.jpeg" alt="Gothic Van" onerror="this.style.display='none'" />
             <div class="card-content">
                 <h2>GOTHIC</h2>
                 <div class="features">
@@ -887,7 +978,8 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT    ============================================================ -->
+    JAVASCRIPT
+    ============================================================ -->
     <script>
         // ============================================================
         //  PARTICLE BACKGROUND
@@ -997,6 +1089,75 @@
         });
 
         // ============================================================
+        //  GALLERY DATA - YOUR IMAGES (1-6 per van)
+        // ============================================================
+        const galleryData = {
+            'Godzilla': [
+                'images/godzilla1.jpeg',
+                'images/godzilla2.jpeg',
+                'images/godzilla3.jpeg',
+                'images/godzilla4.jpeg',
+                'images/godzilla5.jpeg',
+                'images/godzilla6.jpeg'
+            ],
+            'Ragnar': [
+                'images/ragnar1.jpeg',
+                'images/ragnar2.jpeg',
+                'images/ragnar3.jpeg',
+                'images/ragnar4.jpeg',
+                'images/ragnar5.jpeg',
+                'images/ragnar6.jpeg'
+            ],
+            'Gothic': [
+                'images/gothic1.jpeg',
+                'images/gothic2.jpeg',
+                'images/gothic3.jpeg',
+                'images/gothic4.jpeg',
+                'images/gothic5.jpeg',
+                'images/gothic6.jpeg'
+            ]
+        };
+
+        // ============================================================
+        //  AUTO-LOAD GALLERY
+        // ============================================================
+        function loadGallery() {
+            const grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            const vanColors = {
+                'Godzilla': 'godzilla-item',
+                'Ragnar': 'ragnar-item',
+                'Gothic': 'gothic-item'
+            };
+            
+            for (const [vanName, images] of Object.entries(galleryData)) {
+                images.forEach(imgPath => {
+                    const item = document.createElement('div');
+                    item.className = `gallery-item ${vanColors[vanName] || ''}`;
+                    
+                    const img = document.createElement('img');
+                    img.src = imgPath;
+                    img.alt = vanName;
+                    img.loading = 'lazy';
+                    img.onerror = function() {
+                        this.parentElement.style.display = 'none';
+                    };
+                    
+                    const label = document.createElement('div');
+                    label.className = 'van-label';
+                    label.textContent = vanName;
+                    
+                    item.appendChild(img);
+                    item.appendChild(label);
+                    grid.appendChild(item);
+                });
+            }
+        }
+
+        // ============================================================
         //  VAN DATA
         // ============================================================
         const vanData = {
@@ -1006,7 +1167,14 @@
                 phone: '2541107504718',
                 seats: '14 Seater',
                 instagram: 'https://www.instagram.com/godzilaa001/',
-                images: ['images/godzilla-face.jpeg', 'images/godzilla-back.jpeg', 'images/godzilla-face.jpeg', 'images/godzilla-back.jpeg'],
+                images: [
+                    'images/godzilla1.jpeg',
+                    'images/godzilla2.jpeg',
+                    'images/godzilla3.jpeg',
+                    'images/godzilla4.jpeg',
+                    'images/godzilla5.jpeg',
+                    'images/godzilla6.jpeg'
+                ],
                 detailClass: 'godzilla-detail'
             },
             'Ragnar': {
@@ -1015,7 +1183,14 @@
                 phone: '254798394613',
                 seats: '10 Seater',
                 instagram: 'https://www.instagram.com/ragnar.mk001/',
-                images: ['images/ragnar-face.jpeg', 'images/ragnar-back.jpeg', 'images/ragnar-face.jpeg', 'images/ragnar-back.jpeg'],
+                images: [
+                    'images/ragnar1.jpeg',
+                    'images/ragnar2.jpeg',
+                    'images/ragnar3.jpeg',
+                    'images/ragnar4.jpeg',
+                    'images/ragnar5.jpeg',
+                    'images/ragnar6.jpeg'
+                ],
                 detailClass: 'ragnar-detail'
             },
             'Gothic': {
@@ -1024,7 +1199,14 @@
                 phone: '254745717972',
                 seats: '14 Seater',
                 instagram: 'https://www.instagram.com/godz.ill.a_2.0/',
-                images: ['images/gothic-face.jpeg', 'images/gothic-back.jpeg', 'images/gothic-face.jpeg', 'images/gothic-back.jpeg'],
+                images: [
+                    'images/gothic1.jpeg',
+                    'images/gothic2.jpeg',
+                    'images/gothic3.jpeg',
+                    'images/gothic4.jpeg',
+                    'images/gothic5.jpeg',
+                    'images/gothic6.jpeg'
+                ],
                 detailClass: 'gothic-detail'
             }
         };
@@ -1040,6 +1222,7 @@
             document.getElementById('vanDetail').style.display = 'block';
             document.getElementById('homeHero').style.display = 'none';
             document.getElementById('featuresSection').style.display = 'none';
+            document.getElementById('gallerySection').style.display = 'none';
             document.querySelector('.fleet-section-title').style.display = 'none';
 
             const data = vanData[name];
@@ -1067,7 +1250,7 @@
                     <i class="fas fa-map-pin"></i> Based in Nairobi, Kenya
                 </div>
 
-                <img class="gallery-main" id="galleryMain_${name}" src="${data.images[0]}" alt="${name} Main View" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Add more images for ${name}</div>'" />
+                <img class="gallery-main" id="galleryMain_${name}" src="${data.images[0]}" alt="${name} Main View" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;text-align:center;color:#999;\\'>Add images for ${name}</div>'" />
 
                 <div class="gallery-thumbnails">
                     ${galleryThumbnails}
@@ -1192,9 +1375,17 @@
             document.getElementById('vanDetail').style.display = 'none';
             document.getElementById('homeHero').style.display = 'block';
             document.getElementById('featuresSection').style.display = 'block';
+            document.getElementById('gallerySection').style.display = 'block';
             document.querySelector('.fleet-section-title').style.display = 'block';
             window.scrollTo(0, 0);
         }
+
+        // ============================================================
+        //  LOAD EVERYTHING ON PAGE START
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGallery();
+        });
     </script>
 
 </body>
